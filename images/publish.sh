@@ -1,10 +1,13 @@
 #!/bin/bash
 
-# Log in to the Azure Container Registry (ACR)
+# Assuming the necessary environment variables are set:
+# BUILDCR_NAME, BUILD_CLIENTID, BUILD_CLIENTSECRET, BUILDCR_PASSWORD
+
+# Login to Azure Container Registry
 az acr login --name $BUILDCR_NAME --username $BUILD_CLIENTID --password $BUILD_CLIENTSECRET
 
-# Build the Docker image
-docker build -t $BUILDCR_NAME/my-web-app:latest .
+# Build the Docker image (e.g., from the Dockerfile)
+docker build -t $BUILDCR_NAME/test1:latest .
 
-# Push the image to the Azure Container Registry
-docker push $BUILDCR_NAME/my-web-app:latest
+# Push the image to Azure Container Registry
+docker push $BUILDCR_NAME/test1:latest
