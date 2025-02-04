@@ -15,6 +15,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Make publish.sh executable
+        run: chmod +x images/publish.sh  # Ensure the script is executable
+
       - name: Publish Container Images
         run: cd images && ./publish.sh
         env:
