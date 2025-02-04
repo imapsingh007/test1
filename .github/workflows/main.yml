@@ -18,6 +18,15 @@ jobs:
       - name: Make publish.sh executable
         run: chmod +x images/publish.sh  # Ensure the script is executable
 
+      - name: Check environment variables
+        run: |
+          echo "BUILDCR_NAME: $BUILDCR_NAME"
+          echo "BUILD_TENANTID: $BUILD_TENANTID"
+          echo "BUILD_SUBSCRIPTIONID: $BUILD_SUBSCRIPTIONID"
+          echo "BUILD_CLIENTID: $BUILD_CLIENTID"
+          echo "BUILDCR_PASSWORD: $BUILDCR_PASSWORD"
+          echo "BUILD_CLIENTSECRET: $BUILD_CLIENTSECRET"
+
       - name: Publish Container Images
         run: cd images && ./publish.sh
         env:
