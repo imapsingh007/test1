@@ -3,7 +3,6 @@ name: Publish Container Images
 on:
   push:
     branches: ["main"]
-    paths: ["images/**"]
   workflow_dispatch:
 
 jobs:
