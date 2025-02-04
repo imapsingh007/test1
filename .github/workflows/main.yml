@@ -18,21 +18,21 @@ jobs:
       - name: Make publish.sh executable
         run: chmod +x images/publish.sh  # Ensure the script is executable
 
-      - name: Check environment variables
+      - name: Debug environment variables
         run: |
-          echo "BUILDCR_NAME: $BUILDCR_NAME"
-          echo "BUILD_TENANTID: $BUILD_TENANTID"
-          echo "BUILD_SUBSCRIPTIONID: $BUILD_SUBSCRIPTIONID"
-          echo "BUILD_CLIENTID: $BUILD_CLIENTID"
-          echo "BUILDCR_PASSWORD: $BUILDCR_PASSWORD"
-          echo "BUILD_CLIENTSECRET: $BUILD_CLIENTSECRET"
+          echo "BUILDCR_NAME: ${{ secrets.BUILDCR_NAME }}"  # Debugging variable to make sure it is correctly set
+          echo "BUILD_TENANTID: ${{ secrets.BUILD_TENANTID }}"
+          echo "BUILD_SUBSCRIPTIONID: ${{ secrets.BUILD_SUBSCRIPTIONID }}"
+          echo "BUILD_CLIENTID: ${{ secrets.BUILD_CLIENTID }}"
+          echo "BUILDCR_PASSWORD: ***"  # Secrets should be securely handled
+          echo "BUILD_CLIENTSECRET: ***"  # Secrets should be securely handled
 
       - name: Publish Container Images
         run: cd images && ./publish.sh
         env:
-          BUILDCR_NAME: ${{ vars.BUILDCR_NAME }}
-          BUILD_TENANTID: ${{ vars.BUILD_TENANTID }}
-          BUILD_SUBSCRIPTIONID: ${{ vars.BUILD_SUBSCRIPTIONID }}
-          BUILD_CLIENTID: ${{ vars.BUILD_CLIENTID }}
+          BUILDCR_NAME: ${{ secrets.BUILDCR_NAME }}  # Ensure this points to your ACR name (e.g., 'Test1acr')
+          BUILD_TENANTID: ${{ secrets.BUILD_TENANTID }}
+          BUILD_SUBSCRIPTIONID: ${{ secrets.BUILD_SUBSCRIPTIONID }}
+          BUILD_CLIENTID: ${{ secrets.BUILD_CLIENTID }}
           BUILDCR_PASSWORD: ${{ secrets.BUILDCR_PASSWORD }}
           BUILD_CLIENTSECRET: ${{ secrets.BUILD_CLIENTSECRET }}
