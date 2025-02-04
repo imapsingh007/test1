@@ -1,0 +1,27 @@
+name: Publish Container Images
+
+on:
+  push:
+    branches: ["master"]
+    paths: ["images/**"]
+  workflow_dispatch:
+
+jobs:
+  publish:
+    name: Publish Container Images
+    runs-on: ubuntu-latest
+    permissions: write-all
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Publish Container Images
+        run: cd images && ./publish.sh
+        env:
+          BUILDCR_NAME: ${{ vars.BUILDCR_NAME }}
+          BUILD_TENANTID: ${{ vars.BUILD_TENANTID }}
+          BUILD_SUBSCRIPTIONID: ${{ vars.BUILD_SUBSCRIPTIONID }}
+          BUILD_CLIENTID: ${{ vars.BUILD_CLIENTID }}
+          BUILDCR_PASSWORD: ${{ secrets.BUILDCR_PASSWORD }}
+          BUILD_CLIENTSECRET: ${{ secrets.BUILD_CLIENTSECRET }}
