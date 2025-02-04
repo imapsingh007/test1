@@ -1,20 +1,18 @@
-# Use Node.js as base image
-FROM node:18
-
-# Set working directory in the container
-WORKDIR /usr/src/app
-
-# Copy package.json and package-lock.json from the images/ directory
-COPY images/package*.json ./
-
-# Install dependencies
-RUN npm install
-
-# Copy the rest of the application files
-COPY images/ ./
-
-# Expose the app's port (if needed)
-EXPOSE 3000
-
-# Start the app (modify based on your entry point)
-CMD ["npm", "start"]
+{
+  "name": "my-app",
+  "version": "1.0.0",
+  "description": "A simple Node.js app",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "jest"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "jest": "^26.6.3"
+  },
+  "author": "Your Name",
+  "license": "MIT"
+}
