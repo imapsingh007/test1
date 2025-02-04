@@ -7,7 +7,7 @@
 az acr login --name $BUILDCR_NAME --username $BUILD_CLIENTID --password $BUILD_CLIENTSECRET
 
 # Build the Docker image (e.g., from the Dockerfile)
-docker build -t $BUILDCR_NAME/test1:latest .
+docker build -t $BUILDCR_NAME.azurecr.io/test1:latest .
 
 # Push the image to Azure Container Registry
-docker push $BUILDCR_NAME/test1:latest
+docker push $BUILDCR_NAME.azurecr.io/test1:latest
